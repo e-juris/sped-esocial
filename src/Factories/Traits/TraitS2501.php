@@ -195,6 +195,21 @@ trait TraitS2501
             $idetrab = $this->dom->createElement("ideTrab");
             $this->dom->addAttribute($idetrab, 'cpfTrab', $ide->cpftrab);
             if (!empty($ide->calctrib)) {
+                foreach ($ide->calctrib as $calc) {
+                    $calcTrib = $this->dom->createElement("calcTrib");
+                    $this->dom->addAttribute($calcTrib, 'perRef', $calc->perref);
+                    $this->dom->addAttribute($calcTrib, 'vrBcCp13', $calc->vrbccp13 ?? '');
+                    $this->dom->addAttribute($calcTrib, 'vrBcCpMensal', $calc->vrbccpmensal ?? '');
+                    if (!empty($calc->infocrcontrib)) {
+                        foreach ($calc->infocrcontrib as $contrib) {
+                            $cr = $this->dom->createElement("infoCRContrib");
+                            $this->dom->addAttribute($cr, 'tpCR', $contrib->tpcr);
+                            $this->dom->addAttribute($cr, 'vrCR', $contrib->vrcr);
+                            $calcTrib->appendChild($cr);
+                        }
+                        $idetrab->appendChild($calcTrib);
+                    }
+                }
             }
             if (!empty($ide->infocrirrf)) {
                 foreach ($ide->infocrirrf as $cr) {
