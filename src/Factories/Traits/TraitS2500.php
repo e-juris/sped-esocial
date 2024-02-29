@@ -1146,18 +1146,22 @@ trait TraitS2500
                     $vlr->indreperc,
                     true
                 );
-                $this->dom->addChild(
-                    $ivlr,
-                    "indenSD",
-                    $vlr->indensd,
-                    true
-                );
-                $this->dom->addChild(
-                    $ivlr,
-                    "indenAbono",
-                    $vlr->indenabono,
-                    true
-                );
+                if (!empty($vlr->indensd)) {
+                    $this->dom->addChild(
+                        $ivlr,
+                        "indenSD",
+                        $vlr->indensd,
+                        true
+                    );
+                }
+                if (!empty($vlr->indenabono)) {
+                    $this->dom->addChild(
+                        $ivlr,
+                        "indenAbono",
+                        $vlr->indenabono,
+                        true
+                    );
+                }
                 if (!empty($vlr->abono)) {
                     foreach ($vlr->abono as $ab) {
                         $abono = $this->dom->createElement("abono");
